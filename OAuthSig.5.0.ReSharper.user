@@ -1,0 +1,136 @@
+<Configuration>
+  <SettingsComponent>
+    <string />
+    <integer />
+    <boolean>
+      <setting name="SolutionAnalysisEnabled">False</setting>
+    </boolean>
+  </SettingsComponent>
+  <RecentFiles>
+    <RecentFiles>
+      <File id="867C825A-2A46-4CD7-AD01-CAAD3569EFE1/f:OAuthQueryParameters.cs" caret="100" fromTop="3" />
+      <File id="867C825A-2A46-4CD7-AD01-CAAD3569EFE1/f:OAuthBase.cs" caret="5701" fromTop="57" />
+      <File id="867C825A-2A46-4CD7-AD01-CAAD3569EFE1/f:Form1.cs" caret="4053" fromTop="110" />
+      <File id="867C825A-2A46-4CD7-AD01-CAAD3569EFE1/f:ApiPostRequestBuilder.cs" caret="1040" fromTop="25" />
+    </RecentFiles>
+    <RecentEdits>
+      <File id="867C825A-2A46-4CD7-AD01-CAAD3569EFE1/f:OAuthQueryParameters.cs" caret="929" fromTop="20" />
+      <File id="867C825A-2A46-4CD7-AD01-CAAD3569EFE1/f:OAuthQueryParameters.cs" caret="929" fromTop="18" />
+      <File id="867C825A-2A46-4CD7-AD01-CAAD3569EFE1/f:OAuthQueryParameters.cs" caret="929" fromTop="48" />
+      <File id="867C825A-2A46-4CD7-AD01-CAAD3569EFE1/f:OAuthQueryParameters.cs" caret="69" fromTop="31" />
+      <File id="867C825A-2A46-4CD7-AD01-CAAD3569EFE1/f:OAuthQueryParameters.cs" caret="69" fromTop="31" />
+      <File id="867C825A-2A46-4CD7-AD01-CAAD3569EFE1/f:OAuthQueryParameters.cs" caret="69" fromTop="34" />
+      <File id="867C825A-2A46-4CD7-AD01-CAAD3569EFE1/f:OAuthQueryParameters.cs" caret="69" fromTop="47" />
+      <File id="867C825A-2A46-4CD7-AD01-CAAD3569EFE1/f:OAuthQueryParameters.cs" caret="69" fromTop="48" />
+      <File id="867C825A-2A46-4CD7-AD01-CAAD3569EFE1/f:OAuthQueryParameters.cs" caret="69" fromTop="22" />
+      <File id="867C825A-2A46-4CD7-AD01-CAAD3569EFE1/f:OAuthQueryParameters.cs" caret="69" fromTop="38" />
+      <File id="867C825A-2A46-4CD7-AD01-CAAD3569EFE1/f:OAuthQueryParameters.cs" caret="246" fromTop="9" />
+      <File id="867C825A-2A46-4CD7-AD01-CAAD3569EFE1/f:OAuthQueryParameters.cs" caret="69" fromTop="2" />
+      <File id="867C825A-2A46-4CD7-AD01-CAAD3569EFE1/f:ApiPostRequestBuilder.cs" caret="3810" fromTop="34" />
+      <File id="867C825A-2A46-4CD7-AD01-CAAD3569EFE1/f:Form1.cs" caret="4099" fromTop="47" />
+      <File id="867C825A-2A46-4CD7-AD01-CAAD3569EFE1/f:Form1.cs" caret="4118" fromTop="41" />
+      <File id="867C825A-2A46-4CD7-AD01-CAAD3569EFE1/f:ApiPostRequestBuilder.cs" caret="1432" fromTop="30" />
+      <File id="867C825A-2A46-4CD7-AD01-CAAD3569EFE1/f:Form1.cs" caret="1054" fromTop="11" />
+      <File id="867C825A-2A46-4CD7-AD01-CAAD3569EFE1/f:ApiPostRequestBuilder.cs" caret="4429" fromTop="24" />
+      <File id="867C825A-2A46-4CD7-AD01-CAAD3569EFE1/f:ApiPostRequestBuilder.cs" caret="4218" fromTop="44" />
+      <File id="867C825A-2A46-4CD7-AD01-CAAD3569EFE1/f:ApiPostRequestBuilder.cs" caret="776" fromTop="16" />
+      <File id="867C825A-2A46-4CD7-AD01-CAAD3569EFE1/f:Form1.cs" caret="3913" fromTop="29" />
+      <File id="867C825A-2A46-4CD7-AD01-CAAD3569EFE1/f:ApiPostRequestBuilder.cs" caret="1240" fromTop="28" />
+      <File id="867C825A-2A46-4CD7-AD01-CAAD3569EFE1/f:ApiPostRequestBuilder.cs" caret="1044" fromTop="24" />
+      <File id="867C825A-2A46-4CD7-AD01-CAAD3569EFE1/f:ApiPostRequestBuilder.cs" caret="506" fromTop="14" />
+    </RecentEdits>
+  </RecentFiles>
+  <NAntValidationSettings>
+    <NAntPath value="" />
+  </NAntValidationSettings>
+  <UnitTestRunner>
+    <Providers />
+  </UnitTestRunner>
+  <UnitTestRunnerNUnit>
+    <NUnitInstallDir IsNull="False">
+    </NUnitInstallDir>
+    <UseAddins>Never</UseAddins>
+  </UnitTestRunnerNUnit>
+  <CompletionStatisticsManager>
+    <ItemStatistics item="Default">
+      <Item value="if" priority="1" />
+      <Item value="string" priority="6" />
+      <Item value="txtGenURL" priority="3" />
+      <Item value="return" priority="1" />
+      <Item value="webClient" priority="1" />
+      <Item value="new" priority="4" />
+      <Item value="WebClient" priority="0" />
+      <Item value="responseText" priority="0" />
+      <Item value="response" priority="0" />
+      <Item value="OAuth" priority="3" />
+      <Item value="OAuthBase`0" priority="3" />
+      <Item value="OAuthSig" priority="0" />
+      <Item value="signatureTypes" priority="0" />
+      <Item value="signatureGenerator" priority="0" />
+      <Item value="generator" priority="1" />
+      <Item value="SignatureGenerator" priority="0" />
+      <Item value="httpMethod" priority="0" />
+      <Item value="else" priority="0" />
+      <Item value="ApiPostRequestBuilder`0" priority="0" />
+      <Item value="apiPostRequestBuilder" priority="0" />
+      <Item value="true" priority="0" />
+      <Item value="postVariablesTextBox" priority="1" />
+      <Item value="txtConsKey" priority="0" />
+      <Item value="txtConsSecret" priority="0" />
+      <Item value="txtEncodedSig" priority="1" />
+      <Item value="txtRawSig" priority="0" />
+      <Item value="txtTimestamp" priority="0" />
+      <Item value="txtNonce" priority="0" />
+      <Item value="Uri`0" priority="0" />
+      <Item value="Uri" priority="0" />
+      <Item value="uri" priority="1" />
+      <Item value="SevenDigital" priority="0" />
+      <Item value="Security" priority="0" />
+      <Item value="Signature" priority="0" />
+      <Item value="SignatureGenerator`0" priority="0" />
+      <Item value="var" priority="0" />
+      <Item value="sig" priority="1" />
+      <Item value="url" priority="0" />
+      <Item value="dictionary" priority="0" />
+      <Item value="oAuthConsumerKey" priority="0" />
+      <Item value="timeStamp" priority="0" />
+      <Item value="nonce" priority="0" />
+      <Item value="HmacSha1" priority="0" />
+      <Item value="oAuthConsumerSecret" priority="0" />
+      <Item value="txtToken" priority="0" />
+      <Item value="txtTokenSecret" priority="0" />
+      <Item value="try" priority="0" />
+      <Item value="catch" priority="0" />
+      <Item value="WebException`0" priority="0" />
+      <Item value="ex" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.String">
+      <Item value="IsNullOrEmpty`0" priority="0" />
+      <Item value="Empty" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Forms.TextBox">
+      <Item value="Text" priority="13" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Net.WebClient">
+      <Item value="DownloadData`0" priority="0" />
+      <Item value="DownloadString`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@OAuth.OAuthBase">
+      <Item value="SignatureTypes`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:OAuth.OAuthBase">
+      <Item value="GenerateSignature`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:OAuthSig.ApiPostRequestBuilder">
+      <Item value="Build`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:SevenDigital.Security.OAuth.Signature.SignatureGenerator">
+      <Item value="Generate`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Net.WebException">
+      <Item value="Response" priority="0" />
+      <Item value="ToString`0" priority="0" />
+      <Item value="Message" priority="0" />
+    </ItemStatistics>
+  </CompletionStatisticsManager>
+</Configuration>
