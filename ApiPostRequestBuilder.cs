@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Security;
 using System.Text;
 using System.Web;
 using SevenDigital.Security.OAuth.Signature;
@@ -27,6 +28,11 @@ namespace OAuthSig
 			}
 		
 				client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+
+				ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback
+				(
+				(sender, certificate, chain, sslpolicyerrors) => true);
+
 				return client.UploadString(fullyQualifiedUrl, postParams);
 			}catch(WebException ex) {
 				return ex.Message;
