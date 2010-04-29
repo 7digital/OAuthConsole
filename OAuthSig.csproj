@@ -79,6 +79,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiPostRequestBuilder.cs" />
+    <Compile Include="ApiTestHelper.cs" />
+    <Compile Include="Extensions\CollectionExtensions.cs" />
+    <Compile Include="Extensions\CustomExtensions.cs" />
+    <Compile Include="EventArgs.cs" />
     <Compile Include="OAuthQueryParameters.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

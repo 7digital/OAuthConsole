@@ -61,6 +61,13 @@
 			this.makeRequestButton = new System.Windows.Forms.Button();
 			this.postVariablesTextBox = new System.Windows.Forms.TextBox();
 			this.label15 = new System.Windows.Forms.Label();
+			this.tabControl1 = new System.Windows.Forms.TabControl();
+			this.Response = new System.Windows.Forms.TabPage();
+			this.tabPage2 = new System.Windows.Forms.TabPage();
+			this.txtConsoleOut = new System.Windows.Forms.TextBox();
+			this.tabControl1.SuspendLayout();
+			this.Response.SuspendLayout();
+			this.tabPage2.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// txtURI
@@ -69,7 +76,7 @@
 			this.txtURI.Name = "txtURI";
 			this.txtURI.Size = new System.Drawing.Size(377, 20);
 			this.txtURI.TabIndex = 0;
-			this.txtURI.Text = "http://localhost./api/user/signup";
+			this.txtURI.Text = "http://localhost./api/user/payment/addcard";
 			// 
 			// label1
 			// 
@@ -79,7 +86,6 @@
 			this.label1.Size = new System.Drawing.Size(29, 13);
 			this.label1.TabIndex = 1;
 			this.label1.Text = "URI:";
-			this.label1.Click += new System.EventHandler(this.label1_Click);
 			// 
 			// label2
 			// 
@@ -107,7 +113,6 @@
 			this.label4.Size = new System.Drawing.Size(41, 13);
 			this.label4.TabIndex = 4;
 			this.label4.Text = "Token:";
-			this.label4.Click += new System.EventHandler(this.label4_Click);
 			// 
 			// label5
 			// 
@@ -197,7 +202,6 @@
 			this.txtNonce.Name = "txtNonce";
 			this.txtNonce.Size = new System.Drawing.Size(227, 20);
 			this.txtNonce.TabIndex = 16;
-			this.txtNonce.TextChanged += new System.EventHandler(this.textBox7_TextChanged);
 			// 
 			// btnGenerate
 			// 
@@ -280,12 +284,14 @@
 			// 
 			// txtGenURL
 			// 
+			this.txtGenURL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
 			this.txtGenURL.BackColor = System.Drawing.SystemColors.HighlightText;
 			this.txtGenURL.Location = new System.Drawing.Point(93, 378);
 			this.txtGenURL.Multiline = true;
 			this.txtGenURL.Name = "txtGenURL";
 			this.txtGenURL.ReadOnly = true;
-			this.txtGenURL.Size = new System.Drawing.Size(414, 62);
+			this.txtGenURL.Size = new System.Drawing.Size(904, 62);
 			this.txtGenURL.TabIndex = 28;
 			// 
 			// label12
@@ -305,7 +311,6 @@
 			this.label13.Size = new System.Drawing.Size(153, 13);
 			this.label13.TabIndex = 30;
 			this.label13.Text = "(Leave blank to auto-generate)";
-			this.label13.Click += new System.EventHandler(this.label13_Click);
 			// 
 			// label14
 			// 
@@ -332,10 +337,11 @@
 			// 
 			// responseText
 			// 
-			this.responseText.Location = new System.Drawing.Point(93, 551);
+			this.responseText.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.responseText.Location = new System.Drawing.Point(3, 3);
 			this.responseText.Multiline = true;
 			this.responseText.Name = "responseText";
-			this.responseText.Size = new System.Drawing.Size(414, 191);
+			this.responseText.Size = new System.Drawing.Size(979, 185);
 			this.responseText.TabIndex = 33;
 			// 
 			// makeRequestButton
@@ -350,11 +356,14 @@
 			// 
 			// postVariablesTextBox
 			// 
+			this.postVariablesTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
 			this.postVariablesTextBox.Location = new System.Drawing.Point(93, 511);
 			this.postVariablesTextBox.Name = "postVariablesTextBox";
-			this.postVariablesTextBox.Size = new System.Drawing.Size(696, 20);
+			this.postVariablesTextBox.Size = new System.Drawing.Size(907, 20);
 			this.postVariablesTextBox.TabIndex = 35;
-			this.postVariablesTextBox.Text = "?var1=erer&var2=erer";
+			this.postVariablesTextBox.Text = "ccNumber=4111111111112288&ccType=VISA&ccCVC=123&ccName=Joe User&ccWhenStart=52007" +
+				"&ccWhenExpire=112012&ccCountry=GB";
 			// 
 			// label15
 			// 
@@ -365,15 +374,56 @@
 			this.label15.TabIndex = 36;
 			this.label15.Text = "Form Vars (POST)";
 			// 
+			// tabControl1
+			// 
+			this.tabControl1.Controls.Add(this.Response);
+			this.tabControl1.Controls.Add(this.tabPage2);
+			this.tabControl1.Location = new System.Drawing.Point(11, 537);
+			this.tabControl1.Name = "tabControl1";
+			this.tabControl1.SelectedIndex = 0;
+			this.tabControl1.Size = new System.Drawing.Size(993, 217);
+			this.tabControl1.TabIndex = 37;
+			// 
+			// Response
+			// 
+			this.Response.Controls.Add(this.responseText);
+			this.Response.Location = new System.Drawing.Point(4, 22);
+			this.Response.Name = "Response";
+			this.Response.Padding = new System.Windows.Forms.Padding(3);
+			this.Response.Size = new System.Drawing.Size(985, 191);
+			this.Response.TabIndex = 0;
+			this.Response.Text = "Response";
+			this.Response.UseVisualStyleBackColor = true;
+			// 
+			// tabPage2
+			// 
+			this.tabPage2.Controls.Add(this.txtConsoleOut);
+			this.tabPage2.Location = new System.Drawing.Point(4, 22);
+			this.tabPage2.Name = "tabPage2";
+			this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPage2.Size = new System.Drawing.Size(985, 191);
+			this.tabPage2.TabIndex = 1;
+			this.tabPage2.Text = "Console.Writeline";
+			this.tabPage2.UseVisualStyleBackColor = true;
+			// 
+			// txtConsoleOut
+			// 
+			this.txtConsoleOut.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.txtConsoleOut.Location = new System.Drawing.Point(3, 3);
+			this.txtConsoleOut.Multiline = true;
+			this.txtConsoleOut.Name = "txtConsoleOut";
+			this.txtConsoleOut.Size = new System.Drawing.Size(979, 185);
+			this.txtConsoleOut.TabIndex = 0;
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1084, 764);
+			this.ClientSize = new System.Drawing.Size(1013, 764);
+			this.Controls.Add(this.tabControl1);
 			this.Controls.Add(this.label15);
 			this.Controls.Add(this.postVariablesTextBox);
 			this.Controls.Add(this.makeRequestButton);
-			this.Controls.Add(this.responseText);
 			this.Controls.Add(this.drpHTTPMethod);
 			this.Controls.Add(this.label14);
 			this.Controls.Add(this.label13);
@@ -406,6 +456,11 @@
 			this.Name = "Form1";
 			this.Text = "OAuth Signature Generator";
 			this.Load += new System.EventHandler(this.Form1_Load);
+			this.tabControl1.ResumeLayout(false);
+			this.Response.ResumeLayout(false);
+			this.Response.PerformLayout();
+			this.tabPage2.ResumeLayout(false);
+			this.tabPage2.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -446,6 +501,10 @@
 		private System.Windows.Forms.Button makeRequestButton;
 		private System.Windows.Forms.TextBox postVariablesTextBox;
 		private System.Windows.Forms.Label label15;
+		private System.Windows.Forms.TabControl tabControl1;
+		private System.Windows.Forms.TabPage Response;
+		private System.Windows.Forms.TabPage tabPage2;
+		private System.Windows.Forms.TextBox txtConsoleOut;
     }
 }
 
