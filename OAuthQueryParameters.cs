@@ -1,5 +1,4 @@
-﻿using SevenDigital.Security.OAuth.Signature;
-
+﻿
 namespace OAuthSig
 {
 	public static class OAuthQueryParameters

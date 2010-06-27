@@ -6,7 +6,7 @@ using System.Net;
 using System.Net.Security;
 using System.Text;
 using System.Web;
-using SevenDigital.Security.OAuth.Signature;
+using OAuth;
 
 namespace OAuthSig
 {
@@ -39,9 +39,9 @@ namespace OAuthSig
 			}
 			client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
 
-			ApiTestHelper.DumpNameValueCollection(client.Headers, "Headers");
-			ApiTestHelper.FireLogMessage("[Invoke POST]: {0}", fullyQualifiedUrl);
-			ApiTestHelper.FireLogMessage("[Invoke POST-parameters]: {0}", postParams);
+			TestHelper.DumpNameValueCollection(client.Headers, "Headers");
+			TestHelper.FireLogMessage("[Invoke POST]: {0}", fullyQualifiedUrl);
+			TestHelper.FireLogMessage("[Invoke POST-parameters]: {0}", postParams);
 			ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback
 				(
 				(sender, certificate, chain, sslpolicyerrors) => true);
@@ -52,7 +52,7 @@ namespace OAuthSig
 			catch (WebException ex) {
 				var reponse = ex.Response;
 				using (var reader = new StreamReader(reponse.GetResponseStream())) {
-					ApiTestHelper.FireLogMessage("[Invoke POST-Error]: {0}", reader.ReadToEnd());
+					TestHelper.FireLogMessage("[Invoke POST-Error]: {0}", reader.ReadToEnd());
 				}
 				return "[Failed: Please check the Console Out Tab]";
 			}
@@ -101,38 +101,23 @@ namespace OAuthSig
 			return BuildOAuthHeaderString(oAuthParameters);
 		}
 
-		private string GetSignature(Uri url, Dictionary<string, string> dictionary,
-									out string nonce, out string oAuthVersion,
-									out string signature, string oAuthConsumerSecret,
-									string oAuthConsumerKey, string oAuthTokenKey,
-									string oAuthTokenSecret) {
-			SignatureGenerator signatureGenerator = new SignatureGenerator();
-
-			nonce = new DefaultNoncefactory().New();
-			oAuthVersion = "1.0";
-			string timeStamp = new DefaultTimestampFactory().New();
-
-			signature = signatureGenerator.Generate(url, dictionary, oAuthConsumerKey,
-													oAuthConsumerSecret, oAuthTokenKey,
-													oAuthTokenSecret, "POST", timeStamp, nonce,
-													SignatureGenerator.SignatureTypes.HmacSha1,
-													oAuthVersion);
-			return timeStamp;
-		}
-
 		private string GetSignedAuthorizationHeader(Uri url, string postParams,
 													string oAuthConsumerSecret,
 													string oAuthConsumerKey,
 													string oAuthTokenKey,
 													string oAuthTokenSecret) {
 			Dictionary<string, string> dictionary = GetFormVariables(postParams);
-			string nonce;
-			string oAuthVersion;
+		    var oAuthBase = new OAuthBase();
+		    string nonce = oAuthBase.GenerateNonce();
+		    string timeStamp = oAuthBase.GenerateTimeStamp();
+			string oAuthVersion = "1.0";
 			string signature;
-			string timeStamp = GetSignature(url, dictionary, out nonce, out oAuthVersion,
-											out signature, oAuthConsumerSecret,
-											oAuthConsumerKey, oAuthTokenKey, oAuthTokenSecret);
 
+            string normalisedUrl;
+            string requestParams = "";
+		    oAuthBase.includeVersion = true;
+            signature = oAuthBase.GenerateSignature(url, oAuthConsumerKey, oAuthConsumerSecret, oAuthTokenKey, oAuthTokenSecret, "POST",
+                                        timeStamp, nonce, OAuthBase.SignatureTypes.HMACSHA1, out normalisedUrl, out requestParams, dictionary);
 			string header = GetHeader(oAuthVersion, nonce, timeStamp, signature,
 									  oAuthConsumerKey, oAuthTokenKey);
 

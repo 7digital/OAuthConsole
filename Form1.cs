@@ -10,7 +10,7 @@ namespace OAuthSig
 	{
 		public Form1() {
 			InitializeComponent();
-			ApiTestHelper.OnLogMessage += (ApiTestHelper_OnLogMessage);
+			TestHelper.OnLogMessage += (ApiTestHelper_OnLogMessage);
 		}
 
 		private StringBuilder _sb = new StringBuilder();
@@ -69,7 +69,7 @@ namespace OAuthSig
 				                                             token, tokenSecret, httpMethod,
 				                                             timeStamp, nonce, signatureType,
 				                                             out normalizedUrl,
-				                                             out normalizedRequestParameters);
+				                                             out normalizedRequestParameters, null);
 
 				txtRawSig.Text = signature;
 				txtEncodedSig.Text = myOAuth.UrlEncode(signature);
