@@ -58,14 +58,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="SevenDigital.Security.OAuth, Version=2.3.28.38252, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\SevenDigital.Security.OAuth.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -79,7 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiPostRequestBuilder.cs" />
-    <Compile Include="ApiTestHelper.cs" />
+    <Compile Include="TestHelper.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\CustomExtensions.cs" />
     <Compile Include="EventArgs.cs" />

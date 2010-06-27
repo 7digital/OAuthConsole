@@ -1,0 +1,9 @@
+C:\Projects\oauth-helper\bin\Debug\OAuthSig.exe.config
+C:\Projects\oauth-helper\bin\Debug\OAuthSig.exe
+C:\Projects\oauth-helper\bin\Debug\OAuthSig.pdb
+C:\Projects\oauth-helper\obj\Debug\ResolveAssemblyReference.cache
+C:\Projects\oauth-helper\obj\Debug\OAuthSig.Form1.resources
+C:\Projects\oauth-helper\obj\Debug\OAuthSig.Properties.Resources.resources
+C:\Projects\oauth-helper\obj\Debug\OAuthSig.csproj.GenerateResource.Cache
+C:\Projects\oauth-helper\obj\Debug\OAuthSig.exe
+C:\Projects\oauth-helper\obj\Debug\OAuthSig.pdb
