@@ -77,7 +77,7 @@ namespace OAuthSig
 			return enumerable.ToDictionary(str => str.Split('=')[0], str => str.Split('=')[1]);
 		}
 
-		private string GetHeader(string oAuthVersion, string nonce, string timeStamp,
+	    public string GetHeader(string oAuthVersion, string nonce, string timeStamp,
 								 string signature, string oAuthConsumerKey,
 								 string oAuthTokenKey) {
 			IDictionary<string, string> oAuthParameters = new Dictionary<string, string>();
