@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiPostRequestBuilder.cs" />
+    <Compile Include="IView.cs" />
     <Compile Include="TestHelper.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\CustomExtensions.cs" />
