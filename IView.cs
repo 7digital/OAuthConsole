@@ -12,5 +12,13 @@ namespace OAuthSig
         string HttpMethod { get; }
         string TimeStamp { get; set; }
         string Nonce { get; set; }
+        string RawSignature { get; set; }
+        bool IncludeVersion { get; }
+        string EncodedSignature { get; set; }
+        string GeneratedUrl { get; set; }
+        string PostData { get; }
+        int SignatureMethod { get; }
+        void DisplayResponse(string response);
+        void Log();
     }
 }
