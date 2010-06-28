@@ -26,11 +26,21 @@ namespace OAuthSig
 			WebClient client = new WebClient();
 
 			if (oAuthSignRequest) {
-				client.Headers.Add("Authorization",
-								   GetSignedAuthorizationHeader(fullyQualifiedUrl, postParams,
-																oAuthConsumerSecret,
-																oAuthConsumerKey, oAuthTokenKey,
-																oAuthTokenSecret));
+
+                Dictionary<string, string> dictionary = GetFormVariables(postParams);
+                var oAuthBase = new OAuthBase();
+                string nonce = oAuthBase.GenerateNonce();
+                string timeStamp = oAuthBase.GenerateTimeStamp();
+                string signature;
+
+                string normalisedUrl;
+                string requestParams = "";
+                oAuthBase.includeVersion = true;
+                signature = oAuthBase.GenerateSignature(fullyQualifiedUrl, oAuthConsumerKey, oAuthConsumerSecret, oAuthTokenKey, oAuthTokenSecret, "POST",
+                                            timeStamp, nonce, OAuthBase.SignatureTypes.HMACSHA1, out normalisedUrl, out requestParams, dictionary);
+                string header = GetHeader(OAuthBase.OAuthVersion, nonce, timeStamp, signature,
+                                          oAuthConsumerKey, oAuthTokenKey);
+				client.Headers.Add("Authorization", header);
 			}
 			else {
 				IDictionary<string, string> values = new Dictionary<string, string>();
@@ -75,7 +85,7 @@ namespace OAuthSig
 			return sb.ToString();
 		}
 
-		private Dictionary<string, string> GetFormVariables(string postParams) {
+	    public Dictionary<string, string> GetFormVariables(string postParams) {
 			if (string.IsNullOrEmpty(postParams)) {
 				return new Dictionary<string, string>();
 			}
@@ -101,26 +111,5 @@ namespace OAuthSig
 			return BuildOAuthHeaderString(oAuthParameters);
 		}
 
-		private string GetSignedAuthorizationHeader(Uri url, string postParams,
-													string oAuthConsumerSecret,
-													string oAuthConsumerKey,
-													string oAuthTokenKey,
-													string oAuthTokenSecret) {
-			Dictionary<string, string> dictionary = GetFormVariables(postParams);
-		    var oAuthBase = new OAuthBase();
-		    string nonce = oAuthBase.GenerateNonce();
-		    string timeStamp = oAuthBase.GenerateTimeStamp();
-		    string signature;
-
-            string normalisedUrl;
-            string requestParams = "";
-		    oAuthBase.includeVersion = true;
-            signature = oAuthBase.GenerateSignature(url, oAuthConsumerKey, oAuthConsumerSecret, oAuthTokenKey, oAuthTokenSecret, "POST",
-                                        timeStamp, nonce, OAuthBase.SignatureTypes.HMACSHA1, out normalisedUrl, out requestParams, dictionary);
-			string header = GetHeader(OAuthBase.OAuthVersion, nonce, timeStamp, signature,
-									  oAuthConsumerKey, oAuthTokenKey);
-
-			return header;
-		}
 	}
 }

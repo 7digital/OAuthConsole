@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Text;
 using System.Windows.Forms;
@@ -26,8 +27,8 @@ namespace OAuthSig
 
 		private void btnGenerate_Click(object sender, EventArgs e) {
 			OAuthBase.SignatureTypes signatureType = OAuthBase.SignatureTypes.HMACSHA1;
-			string normalizedUrl;
-			string normalizedRequestParameters;
+			string normalizedUrl = null;
+			string normalizedRequestParameters = null;
 			OAuthBase myOAuth = new OAuthBase();
 
 			try {
@@ -64,14 +65,28 @@ namespace OAuthSig
 				}
 
 				myOAuth.includeVersion = chkVersion.Checked;
+                
+				string signature = "";
+                if (httpMethod == "POST")
+                {
+                    ApiPostRequestBuilder apiPostRequestBuilder = new ApiPostRequestBuilder();
+                    Dictionary<string, string> dictionary = new ApiPostRequestBuilder().GetFormVariables(postVariablesTextBox.Text);
+                       signature = myOAuth.GenerateSignature(uri, txtConsKey.Text, txtConsSecret.Text, txtToken.Text, txtTokenSecret.Text, "POST",
+                                            timeStamp, nonce, OAuthBase.SignatureTypes.HMACSHA1, out normalizedUrl, out normalizedRequestParameters, dictionary);
+                    responseText.Text = apiPostRequestBuilder.Build(true,
+                                                                    uri, postVariablesTextBox.Text,
+                                                                    txtConsKey.Text,
+                                                                    txtConsSecret.Text, txtToken.Text, txtTokenSecret.Text); 
+                }else
+                {
+                    signature = myOAuth.GenerateSignature(uri, consumerKey, consumerSecret,
+                                                          token, tokenSecret, httpMethod,
+                                                          timeStamp, nonce, signatureType,
+                                                          out normalizedUrl,
+                                                          out normalizedRequestParameters, null);
+                }
 
-				string signature = myOAuth.GenerateSignature(uri, consumerKey, consumerSecret,
-				                                             token, tokenSecret, httpMethod,
-				                                             timeStamp, nonce, signatureType,
-				                                             out normalizedUrl,
-				                                             out normalizedRequestParameters, null);
-
-				txtRawSig.Text = signature;
+			    txtRawSig.Text = signature;
 				txtEncodedSig.Text = myOAuth.UrlEncode(signature);
 
 				txtGenURL.Text = normalizedUrl + "?" + normalizedRequestParameters +
