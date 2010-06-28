@@ -56,7 +56,7 @@ namespace OAuth {
             #endregion
         }
 
-		protected const string OAuthVersion = "1.0";
+	    public const string OAuthVersion = "1.0";
         protected const string OAuthParameterPrefix = "oauth_";
 
         public bool includeVersion = true;
