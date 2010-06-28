@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Net;
 using System.Text;
 using System.Windows.Forms;
-using OAuth;
 
 namespace OAuthSig
 {
@@ -16,7 +13,7 @@ namespace OAuthSig
 
 		private StringBuilder _sb = new StringBuilder();
 
-		private void ApiTestHelper_OnLogMessage(object sender, EventArgs<string> args) {
+	    private void ApiTestHelper_OnLogMessage(object sender, EventArgs<string> args) {
 			_sb.AppendLine(args.EventData);
 		}
 
@@ -28,102 +25,25 @@ namespace OAuthSig
 		private void btnGenerate_Click(object sender, EventArgs e) {
 		
 
-			DoStuff(this);
+			new OAuthSignatureBuilder(this).GenerateSignature();
 		}
 
-	    private void DoStuff(IView view)
+	    private void makeRequestButton_Click(object sender, EventArgs e)
 	    {
-
-
-            OAuthBase.SignatureTypes signatureType = OAuthBase.SignatureTypes.HMACSHA1;
-            string normalizedUrl = null;
-            string normalizedRequestParameters = null;
-            OAuthBase myOAuth = new OAuthBase();
-	        try {
-	            Uri uri = new Uri(view.Uri);
-
-	            string consumerKey = view.ConsumerKey;
-	            string consumerSecret = view.ConsumerSecret;
-	            string token = view.Token;
-	            string tokenSecret = view.TokenSecret;
-	            string httpMethod = view.HttpMethod;
-	            string timeStamp = view.TimeStamp;
-	            string nonce = view.Nonce;
-
-	            if (string.IsNullOrEmpty(timeStamp)) {
-	                timeStamp = myOAuth.GenerateTimeStamp();
-	                txtTimestamp.Text = timeStamp;
-	            }
-
-	            if (string.IsNullOrEmpty(nonce)) {
-	                nonce = myOAuth.GenerateNonce();
-	                txtNonce.Text = nonce;
-	            }
-
-	            switch (drpSigMethod.SelectedIndex) {
-	                case 0:
-	                    signatureType = OAuthBase.SignatureTypes.HMACSHA1;
-	                    break;
-	                case 1:
-	                    signatureType = OAuthBase.SignatureTypes.PLAINTEXT;
-	                    break;
-	                case 2:
-	                    signatureType = OAuthBase.SignatureTypes.RSASHA1;
-	                    break;
-	            }
-
-	            myOAuth.includeVersion = chkVersion.Checked;
-                
-	            string signature = "";
-	            if (httpMethod == "POST")
-	            {
-	                Dictionary<string, string> dictionary = new ApiPostRequestBuilder().GetFormVariables(postVariablesTextBox.Text);
-	                signature = myOAuth.GenerateSignature(uri, txtConsKey.Text, txtConsSecret.Text, txtToken.Text, txtTokenSecret.Text, "POST",
-	                                                      timeStamp, nonce, OAuthBase.SignatureTypes.HMACSHA1, out normalizedUrl, out normalizedRequestParameters, dictionary);
-                     
-	            }else
-	            {
-	                signature = myOAuth.GenerateSignature(uri, consumerKey, consumerSecret,
-	                                                      token, tokenSecret, httpMethod,
-	                                                      timeStamp, nonce, signatureType,
-	                                                      out normalizedUrl,
-	                                                      out normalizedRequestParameters, null);
-	            }
-
-	            txtRawSig.Text = signature;
-	            txtEncodedSig.Text = myOAuth.UrlEncode(signature);
-
-	            txtGenURL.Text = normalizedUrl + "?" + normalizedRequestParameters +
-	                             "&oauth_signature=" + txtEncodedSig.Text;
-	        } catch (Exception exception) {
-	            MessageBox.Show(exception.Message);
-	        }
+	        txtConsoleOut.Text = String.Empty;
+	        new OAuthRequest(this).Request();
 	    }
 
-	    private void makeRequestButton_Click(object sender, EventArgs e) {
-			txtConsoleOut.Text = String.Empty;
-			string httpMethod = drpHTTPMethod.SelectedItem.ToString();
-			if (string.IsNullOrEmpty(txtGenURL.Text)) {
-				return;
-			}
+	    public void Log()
+	    {
+            _sb = new StringBuilder();
+	        txtConsoleOut.Text = _sb.ToString();
+	    }
 
-			if (httpMethod == "POST") {
-				ApiPostRequestBuilder apiPostRequestBuilder = new ApiPostRequestBuilder();
-				Uri uri = new Uri(txtURI.Text);
-				responseText.Text = apiPostRequestBuilder.Build(true,
-				                                                uri, postVariablesTextBox.Text,
-				                                                txtConsKey.Text,
-				                                                txtConsSecret.Text, txtToken.Text,
-				                                                txtTokenSecret.Text, txtRawSig.Text, txtNonce.Text, txtTimestamp.Text);
-			} else {
-				WebClient webClient = new WebClient();
-				string response = webClient.DownloadString(txtGenURL.Text);
-				responseText.Text = response;
-			}
-
-			txtConsoleOut.Text = _sb.ToString();
-			_sb = new StringBuilder();
-		}
+	    public void DisplayResponse(string response)
+	    {
+	        responseText.Text = response;
+	    }
 
 	    public string Uri
 	    {
@@ -166,6 +86,39 @@ namespace OAuthSig
 	    {
 	        get { return txtNonce.Text; }
 	        set { txtNonce.Text = value; }
+	    }
+
+	    public string RawSignature
+	    {
+            get { return txtRawSig.Text; }
+	        set { txtRawSig.Text = value; }
+	    }
+
+	    public bool IncludeVersion
+	    {
+            get { return chkVersion.Checked; }
+	    }
+
+	    public string EncodedSignature
+	    {
+            get { return txtEncodedSig.Text; }
+	        set { txtEncodedSig.Text = value; }
+	    }
+
+	    public string GeneratedUrl
+	    {
+            get { return txtGenURL.Text; }
+	        set { txtGenURL.Text = value;}
+	    }
+
+	    public string PostData
+	    {
+            get { return postVariablesTextBox.Text; }
+	    }
+
+	    public int SignatureMethod
+	    {
+            get { return drpSigMethod.SelectedIndex; }
 	    }
 	}
 }

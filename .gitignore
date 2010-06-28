@@ -2,10 +2,9 @@ _ReSharper.*/*
 _ReSharper.*/**/*
 *.resharper.user
 *.suo
-src/**/obj
-src/**/obj/*
-src/**/obj/**/*
-src/**/bin/*
+obj
+obj/*
+obj/**/*
 bin
 bin/*
 bin/**/*

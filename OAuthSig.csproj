@@ -71,7 +71,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiPostRequestBuilder.cs" />
+    <Compile Include="OAuthSignatureBuilder.cs" />
     <Compile Include="IView.cs" />
+    <Compile Include="OAuthRequest.cs" />
     <Compile Include="TestHelper.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\CustomExtensions.cs" />
