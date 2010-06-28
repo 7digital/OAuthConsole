@@ -110,15 +110,14 @@ namespace OAuthSig
 		    var oAuthBase = new OAuthBase();
 		    string nonce = oAuthBase.GenerateNonce();
 		    string timeStamp = oAuthBase.GenerateTimeStamp();
-			string oAuthVersion = "1.0";
-			string signature;
+		    string signature;
 
             string normalisedUrl;
             string requestParams = "";
 		    oAuthBase.includeVersion = true;
             signature = oAuthBase.GenerateSignature(url, oAuthConsumerKey, oAuthConsumerSecret, oAuthTokenKey, oAuthTokenSecret, "POST",
                                         timeStamp, nonce, OAuthBase.SignatureTypes.HMACSHA1, out normalisedUrl, out requestParams, dictionary);
-			string header = GetHeader(oAuthVersion, nonce, timeStamp, signature,
+			string header = GetHeader(OAuthBase.OAuthVersion, nonce, timeStamp, signature,
 									  oAuthConsumerKey, oAuthTokenKey);
 
 			return header;
