@@ -69,14 +69,10 @@ namespace OAuthSig
 				string signature = "";
                 if (httpMethod == "POST")
                 {
-                    ApiPostRequestBuilder apiPostRequestBuilder = new ApiPostRequestBuilder();
                     Dictionary<string, string> dictionary = new ApiPostRequestBuilder().GetFormVariables(postVariablesTextBox.Text);
                        signature = myOAuth.GenerateSignature(uri, txtConsKey.Text, txtConsSecret.Text, txtToken.Text, txtTokenSecret.Text, "POST",
                                             timeStamp, nonce, OAuthBase.SignatureTypes.HMACSHA1, out normalizedUrl, out normalizedRequestParameters, dictionary);
-                    responseText.Text = apiPostRequestBuilder.Build(true,
-                                                                    uri, postVariablesTextBox.Text,
-                                                                    txtConsKey.Text,
-                                                                    txtConsSecret.Text, txtToken.Text, txtTokenSecret.Text); 
+                     
                 }else
                 {
                     signature = myOAuth.GenerateSignature(uri, consumerKey, consumerSecret,
@@ -110,7 +106,7 @@ namespace OAuthSig
 				                                                uri, postVariablesTextBox.Text,
 				                                                txtConsKey.Text,
 				                                                txtConsSecret.Text, txtToken.Text,
-				                                                txtTokenSecret.Text);
+				                                                txtTokenSecret.Text, txtRawSig.Text, txtNonce.Text, txtTimestamp.Text);
 			} else {
 				WebClient webClient = new WebClient();
 				string response = webClient.DownloadString(txtGenURL.Text);
