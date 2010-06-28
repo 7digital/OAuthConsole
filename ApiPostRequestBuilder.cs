@@ -12,32 +12,16 @@ namespace OAuthSig
 {
 	public class ApiPostRequestBuilder
 	{
-		public string Build(bool oAuthSignRequest, Uri fullyQualifiedUrl, string postParams,
-							string oAuthConsumerKey, string oAuthConsumerSecret) {
-			return Build(oAuthSignRequest, fullyQualifiedUrl, postParams, oAuthConsumerKey,
-				  oAuthConsumerSecret, String.Empty, String.Empty);
-		}
 
 		public string Build(bool oAuthSignRequest, Uri fullyQualifiedUrl, string postParams,
 							string oAuthConsumerKey, string oAuthConsumerSecret,
 							string oAuthTokenKey,
-							string oAuthTokenSecret) {
+							string oAuthTokenSecret, string signature, string nonce, string timeStamp) {
 
 			WebClient client = new WebClient();
 
 			if (oAuthSignRequest) {
 
-                Dictionary<string, string> dictionary = GetFormVariables(postParams);
-                var oAuthBase = new OAuthBase();
-                string nonce = oAuthBase.GenerateNonce();
-                string timeStamp = oAuthBase.GenerateTimeStamp();
-                string signature;
-
-                string normalisedUrl;
-                string requestParams = "";
-                oAuthBase.includeVersion = true;
-                signature = oAuthBase.GenerateSignature(fullyQualifiedUrl, oAuthConsumerKey, oAuthConsumerSecret, oAuthTokenKey, oAuthTokenSecret, "POST",
-                                            timeStamp, nonce, OAuthBase.SignatureTypes.HMACSHA1, out normalisedUrl, out requestParams, dictionary);
                 string header = GetHeader(OAuthBase.OAuthVersion, nonce, timeStamp, signature,
                                           oAuthConsumerKey, oAuthTokenKey);
 				client.Headers.Add("Authorization", header);
