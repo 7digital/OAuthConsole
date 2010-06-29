@@ -22,24 +22,50 @@ namespace OAuthSig
 
             if (httpMethod == "POST")
             {
+                DoHttpPost();
+            }
+            else
+            {
+                DoHttpGet();
+            }
+
+            _view.Log();
+
+        }
+
+        private void DoHttpGet()
+        {
+            try
+            {
+                WebClient webClient = new WebClient();
+                string response = webClient.DownloadString(_view.GeneratedUrl);
+                _view.DisplayResponse(response);
+            }
+            catch (WebException wex)
+            {
+
+                TestHelper.FireLogMessage(wex.Message);
+            }
+        }
+
+        private void DoHttpPost()
+        {
+            try
+            {
+
                 ApiPostRequestBuilder apiPostRequestBuilder = new ApiPostRequestBuilder();
                 Uri uri = new Uri(_view.Uri);
                 string response = apiPostRequestBuilder.Build(true,
                                                               uri, _view.PostData,
                                                               _view.ConsumerKey,
                                                               _view.ConsumerSecret, _view.Token,
-                                                              _view.TokenSecret, _view.RawSignature, _view.Nonce, _view.TimeStamp);
+                                                              _view.TokenSecret, _view.RawSignature, _view.Nonce,
+                                                              _view.TimeStamp);
                 _view.DisplayResponse(response);
-            }
-            else
+            }catch(WebException wex)
             {
-                WebClient webClient = new WebClient();
-                string response = webClient.DownloadString(_view.GeneratedUrl);
-                _view.DisplayResponse(response);
+                TestHelper.FireLogMessage(wex.Message);
             }
-
-            _view.Log();
-
         }
     }
 }
