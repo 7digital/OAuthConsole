@@ -65,6 +65,7 @@
             this.Response = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.txtConsoleOut = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.Response.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -144,7 +145,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(57, 248);
+            this.label8.Location = new System.Drawing.Point(51, 248);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(42, 13);
             this.label8.TabIndex = 8;
@@ -214,7 +215,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(51, 330);
+            this.label10.Location = new System.Drawing.Point(8, 330);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(133, 13);
             this.label10.TabIndex = 19;
@@ -256,7 +257,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(30, 355);
+            this.label11.Location = new System.Drawing.Point(8, 355);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(154, 13);
             this.label11.TabIndex = 25;
@@ -289,7 +290,7 @@
             this.txtGenURL.Multiline = true;
             this.txtGenURL.Name = "txtGenURL";
             this.txtGenURL.ReadOnly = true;
-            this.txtGenURL.Size = new System.Drawing.Size(904, 62);
+            this.txtGenURL.Size = new System.Drawing.Size(643, 62);
             this.txtGenURL.TabIndex = 28;
             // 
             // label12
@@ -339,7 +340,7 @@
             this.responseText.Location = new System.Drawing.Point(3, 3);
             this.responseText.Multiline = true;
             this.responseText.Name = "responseText";
-            this.responseText.Size = new System.Drawing.Size(979, 185);
+            this.responseText.Size = new System.Drawing.Size(715, 185);
             this.responseText.TabIndex = 33;
             // 
             // makeRequestButton
@@ -358,17 +359,17 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.postVariablesTextBox.Location = new System.Drawing.Point(93, 511);
             this.postVariablesTextBox.Name = "postVariablesTextBox";
-            this.postVariablesTextBox.Size = new System.Drawing.Size(907, 20);
+            this.postVariablesTextBox.Size = new System.Drawing.Size(643, 20);
             this.postVariablesTextBox.TabIndex = 35;
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(2, 514);
+            this.label15.Location = new System.Drawing.Point(1, 495);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(92, 13);
+            this.label15.Size = new System.Drawing.Size(114, 13);
             this.label15.TabIndex = 36;
-            this.label15.Text = "Form Vars (POST)";
+            this.label15.Text = "Form Variables (POST)";
             // 
             // tabControl1
             // 
@@ -377,7 +378,7 @@
             this.tabControl1.Location = new System.Drawing.Point(11, 537);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(993, 217);
+            this.tabControl1.Size = new System.Drawing.Size(729, 217);
             this.tabControl1.TabIndex = 37;
             // 
             // Response
@@ -386,7 +387,7 @@
             this.Response.Location = new System.Drawing.Point(4, 22);
             this.Response.Name = "Response";
             this.Response.Padding = new System.Windows.Forms.Padding(3);
-            this.Response.Size = new System.Drawing.Size(985, 191);
+            this.Response.Size = new System.Drawing.Size(721, 191);
             this.Response.TabIndex = 0;
             this.Response.Text = "Response";
             this.Response.UseVisualStyleBackColor = true;
@@ -411,11 +412,21 @@
             this.txtConsoleOut.Size = new System.Drawing.Size(979, 185);
             this.txtConsoleOut.TabIndex = 0;
             // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(134, 495);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(345, 13);
+            this.label16.TabIndex = 38;
+            this.label16.Text = "Enter as key value pairs seperated by &&. Eg : var1=value1&&var2=value2";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1013, 764);
+            this.ClientSize = new System.Drawing.Size(747, 764);
+            this.Controls.Add(this.label16);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.postVariablesTextBox);
@@ -501,6 +512,7 @@
 		private System.Windows.Forms.TabPage Response;
 		private System.Windows.Forms.TabPage tabPage2;
 		private System.Windows.Forms.TextBox txtConsoleOut;
+        private System.Windows.Forms.Label label16;
     }
 }
 
