@@ -43,9 +43,9 @@ namespace OAuthSig
 		{
 			try
 			{
-				var apiPostRequestBuilder = new ApiPostRequestBuilder();
+				var apiPostRequestBuilder = new OAuthPostRequest();
 				var uri = new Uri(_view.Uri);
-				string response = apiPostRequestBuilder.Build(true,
+				string response = apiPostRequestBuilder.Post(true,
 				                                              uri, _view.PostData,
 				                                              _view.ConsumerKey,
 				                                              _view.ConsumerSecret, _view.Token,

@@ -62,7 +62,7 @@ namespace OAuthSig
 				string signature = "";
 				if (httpMethod == "POST")
 				{
-					Dictionary<string, string> dictionary = new ApiPostRequestBuilder().GetFormVariables(_view.PostData);
+					Dictionary<string, string> dictionary = new OAuthPostRequest().GetFormVariables(_view.PostData);
 					signature = myOAuth.GenerateSignature(uri, consumerKey, consumerSecret, token, tokenSecret, httpMethod,
 					                                      timeStamp, nonce, signatureType, out normalizedUrl,
 					                                      out normalizedRequestParameters, dictionary);
