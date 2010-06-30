@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 
 namespace OAuthSig
@@ -34,9 +35,23 @@ namespace OAuthSig
 
 		private void DoHttpGet()
 		{
-			var webClient = new WebClient();
-			string response = webClient.DownloadString(_view.GeneratedUrl);
-			_view.DisplayResponse(response);
+			try {
+				var webClient = new WebClient();
+				string response = webClient.DownloadString(_view.GeneratedUrl);
+				_view.DisplayResponse(response);
+			}
+			catch (WebException wex)
+			{
+				DisplayError(wex);
+			}
+		}
+
+		private void DisplayError(WebException wex) {
+			_view.DisplayResponse("[Failed: Please check the Console Out Tab]");
+			string response = new StreamReader(wex.Response.GetResponseStream()).ReadToEnd();
+			TestHelper.FireLogMessage(wex.Message);
+			TestHelper.FireLogMessage(response);
+			_view.Log();
 		}
 
 		private void DoHttpPost()
@@ -55,7 +70,7 @@ namespace OAuthSig
 			}
 			catch (WebException wex)
 			{
-				TestHelper.FireLogMessage(wex.Message);
+				DisplayError(wex);
 			}
 		}
 	}

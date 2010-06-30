@@ -5,6 +5,8 @@ _ReSharper.*/**/*
 obj
 obj/*
 obj/**/*
+obj/**
+obj/Debug/**/*
 bin
 bin/*
 bin/**/*
