@@ -30,13 +30,14 @@ namespace OAuthSig
 
 	    private void makeRequestButton_Click(object sender, EventArgs e)
 	    {
-	        txtConsoleOut.Text = String.Empty;
+	        
+			txtConsoleOut.Text = String.Empty;
+			_sb = new StringBuilder();
 	        new OAuthRequest(this).Request();
 	    }
 
 	    public void Log()
 	    {
-            _sb = new StringBuilder();
 	        txtConsoleOut.Text = _sb.ToString();
 	    }
 

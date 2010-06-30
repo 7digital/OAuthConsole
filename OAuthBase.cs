@@ -211,13 +211,13 @@ namespace OAuth {
             {
                 parameters.Add(new QueryParameter(OAuthVersionKey, OAuthVersion));
             }
-            if(postParams != null & httpMethod.ToUpper() == "POST")
-            {
-                foreach (var key in postParams.Keys)
-                {
-                    parameters.Add(new QueryParameter(key, postParams[key]));
-                }
-            }
+//            if(postParams != null & httpMethod.ToUpper() == "POST")
+//            {
+//                foreach (var key in postParams.Keys)
+//                {
+//                    parameters.Add(new QueryParameter(key, postParams[key]));
+//                }
+//            }
             parameters.Add(new QueryParameter(OAuthNonceKey, nonce));
             parameters.Add(new QueryParameter(OAuthTimestampKey, timeStamp));
             parameters.Add(new QueryParameter(OAuthSignatureMethodKey, signatureType));
