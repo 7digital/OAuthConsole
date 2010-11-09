@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OAuthSig", "OAuthSig.csproj", "{867C825A-2A46-4CD7-AD01-CAAD3569EFE1}"
 EndProject
 Global
