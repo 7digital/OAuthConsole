@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 
-namespace OAuthSig.Extensions
+namespace SevenDigital.Api.OAuthConsole.UI.Extensions
 {
 	public static class CollectionExtensions
 	{

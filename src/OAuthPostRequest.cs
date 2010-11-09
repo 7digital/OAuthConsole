@@ -6,9 +6,8 @@ using System.Net;
 using System.Net.Security;
 using System.Text;
 using System.Web;
-using OAuth;
 
-namespace OAuthSig
+namespace SevenDigital.Api.OAuthConsole.UI
 {
 	public class OAuthPostRequest
 	{

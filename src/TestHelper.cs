@@ -2,9 +2,9 @@ using System;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
-using OAuthSig.Extensions;
+using SevenDigital.Api.OAuthConsole.UI.Extensions;
 
-namespace OAuthSig
+namespace SevenDigital.Api.OAuthConsole.UI
 {
 	internal static class TestHelper
 	{

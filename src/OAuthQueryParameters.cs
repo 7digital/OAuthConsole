@@ -1,5 +1,5 @@
 ﻿
-namespace OAuthSig
+namespace SevenDigital.Api.OAuthConsole.UI
 {
 	public static class OAuthQueryParameters
 	{

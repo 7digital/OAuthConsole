@@ -2,7 +2,7 @@
 using System.Text;
 using System.Windows.Forms;
 
-namespace OAuthSig
+namespace SevenDigital.Api.OAuthConsole.UI
 {
 	public partial class Form1 : Form, IView
 	{

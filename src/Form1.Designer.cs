@@ -1,4 +1,4 @@
-﻿namespace OAuthSig
+﻿namespace SevenDigital.Api.OAuthConsole.UI
 {
     partial class Form1 
     {

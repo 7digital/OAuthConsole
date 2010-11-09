@@ -2,7 +2,7 @@
 using System.IO;
 using System.Net;
 
-namespace OAuthSig
+namespace SevenDigital.Api.OAuthConsole.UI
 {
 	internal class OAuthRequest
 	{

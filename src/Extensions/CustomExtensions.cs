@@ -1,6 +1,6 @@
 using System;
 
-namespace OAuthSig.Extensions
+namespace SevenDigital.Api.OAuthConsole.UI.Extensions
 {
 	public static class CustomExtensions
 	{

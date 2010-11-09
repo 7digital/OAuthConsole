@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using OAuth;
 
-namespace OAuthSig
+namespace SevenDigital.Api.OAuthConsole.UI
 {
 	internal class OAuthSignatureBuilder
 	{

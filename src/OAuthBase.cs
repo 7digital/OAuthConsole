@@ -1,11 +1,10 @@
 using System;
-using System.Collections.Specialized;
 using System.Security.Cryptography;
 using System.Collections.Generic;
 using System.Text;
 using System.Web;
 
-namespace OAuth {
+namespace SevenDigital.Api.OAuthConsole.UI {
 	public class OAuthBase {
 
         /// <summary>

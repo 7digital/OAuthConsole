@@ -1,6 +1,4 @@
-using System;
-
-namespace OAuthSig
+namespace SevenDigital.Api.OAuthConsole.UI
 {
     public interface IView
     {
