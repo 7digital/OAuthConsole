@@ -1,14 +1,15 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using SevenDigital.Api.OAuthConsole.UI.Http;
 
-namespace SevenDigital.Api.OAuthConsole.UI
+namespace SevenDigital.Api.OAuthConsole.UI.OAuth
 {
-	internal class OAuthRequest
+	internal class HttpOAuthClient
 	{
 		private readonly IView _view;
 
-		public OAuthRequest(IView view)
+		public HttpOAuthClient(IView view)
 		{
 			_view = view;
 		}
@@ -60,12 +61,8 @@ namespace SevenDigital.Api.OAuthConsole.UI
 			{
 				var apiPostRequestBuilder = new OAuthPostRequest();
 				var uri = new Uri(_view.Uri);
-				string response = apiPostRequestBuilder.Post(true,
-				                                              uri, _view.PostData,
-				                                              _view.ConsumerKey,
-				                                              _view.ConsumerSecret, _view.Token,
-				                                              _view.TokenSecret, _view.RawSignature, _view.Nonce,
-				                                              _view.TimeStamp);
+				var oAuthRequest = new OAuthRequest(true, uri, _view.PostData, _view.ConsumerKey, _view.ConsumerSecret, _view.Token, _view.TokenSecret, _view.RawSignature, _view.Nonce, _view.TimeStamp);
+				string response = apiPostRequestBuilder.Post(oAuthRequest);
 				_view.DisplayResponse(response);
 			}
 			catch (WebException wex)

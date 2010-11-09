@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Web;
 
-namespace SevenDigital.Api.OAuthConsole.UI {
+namespace SevenDigital.Api.OAuthConsole.UI.OAuth {
 	public class OAuthBase {
 
         /// <summary>

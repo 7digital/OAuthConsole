@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Windows.Forms;
+using SevenDigital.Api.OAuthConsole.UI.OAuth;
 
 namespace SevenDigital.Api.OAuthConsole.UI
 {
@@ -33,7 +34,7 @@ namespace SevenDigital.Api.OAuthConsole.UI
 	        
 			txtConsoleOut.Text = String.Empty;
 			_sb = new StringBuilder();
-	        new OAuthRequest(this).Request();
+	        new HttpOAuthClient(this).Request();
 	    }
 
 	    public void Log()

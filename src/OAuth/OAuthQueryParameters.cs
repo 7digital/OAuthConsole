@@ -1,5 +1,5 @@
 ﻿
-namespace SevenDigital.Api.OAuthConsole.UI
+namespace SevenDigital.Api.OAuthConsole.UI.OAuth
 {
 	public static class OAuthQueryParameters
 	{

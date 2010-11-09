@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using SevenDigital.Api.OAuthConsole.UI.Http;
 
-namespace SevenDigital.Api.OAuthConsole.UI
+namespace SevenDigital.Api.OAuthConsole.UI.OAuth
 {
 	internal class OAuthSignatureBuilder
 	{
@@ -61,7 +62,7 @@ namespace SevenDigital.Api.OAuthConsole.UI
 				string signature = "";
 				if (httpMethod == "POST")
 				{
-					Dictionary<string, string> dictionary = new OAuthPostRequest().GetFormVariables(_view.PostData);
+					Dictionary<string, string> dictionary = new HttPostVariables().Parse(_view.PostData);
 					signature = myOAuth.GenerateSignature(uri, consumerKey, consumerSecret, token, tokenSecret, httpMethod,
 					                                      timeStamp, nonce, signatureType, out normalizedUrl,
 					                                      out normalizedRequestParameters, dictionary);
