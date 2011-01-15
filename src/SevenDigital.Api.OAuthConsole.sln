@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenDigital.Api.OAuthConsole.UI", "SevenDigital.Api.OAuthConsole.UI.csproj", "{867C825A-2A46-4CD7-AD01-CAAD3569EFE1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenDigital.Api.OAuthConsole.Tests", "SevenDigital.Api.OAuthConsole.Tests\SevenDigital.Api.OAuthConsole.Tests.csproj", "{45A6B9FB-8839-4DD0-A58D-CB11BB8C2493}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{867C825A-2A46-4CD7-AD01-CAAD3569EFE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{867C825A-2A46-4CD7-AD01-CAAD3569EFE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{867C825A-2A46-4CD7-AD01-CAAD3569EFE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45A6B9FB-8839-4DD0-A58D-CB11BB8C2493}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45A6B9FB-8839-4DD0-A58D-CB11BB8C2493}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45A6B9FB-8839-4DD0-A58D-CB11BB8C2493}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45A6B9FB-8839-4DD0-A58D-CB11BB8C2493}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
