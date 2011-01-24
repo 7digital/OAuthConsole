@@ -40,7 +40,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.txtConsKey = new System.Windows.Forms.TextBox();
             this.txtConsSecret = new System.Windows.Forms.TextBox();
-            this.txtToken = new System.Windows.Forms.TextBox();
             this.txtTokenSecret = new System.Windows.Forms.TextBox();
             this.txtTimestamp = new System.Windows.Forms.TextBox();
             this.txtNonce = new System.Windows.Forms.TextBox();
@@ -66,6 +65,9 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.txtConsoleOut = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.txtToken = new System.Windows.Forms.TextBox();
+            this.chkOauthInBody = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.Response.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -173,13 +175,6 @@
             this.txtConsSecret.Name = "txtConsSecret";
             this.txtConsSecret.Size = new System.Drawing.Size(227, 20);
             this.txtConsSecret.TabIndex = 11;
-            // 
-            // txtToken
-            // 
-            this.txtToken.Location = new System.Drawing.Point(108, 126);
-            this.txtToken.Name = "txtToken";
-            this.txtToken.Size = new System.Drawing.Size(227, 20);
-            this.txtToken.TabIndex = 12;
             // 
             // txtTokenSecret
             // 
@@ -398,7 +393,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(985, 191);
+            this.tabPage2.Size = new System.Drawing.Size(721, 191);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Console.Writeline";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -409,7 +404,7 @@
             this.txtConsoleOut.Location = new System.Drawing.Point(3, 3);
             this.txtConsoleOut.Multiline = true;
             this.txtConsoleOut.Name = "txtConsoleOut";
-            this.txtConsoleOut.Size = new System.Drawing.Size(979, 185);
+            this.txtConsoleOut.Size = new System.Drawing.Size(715, 185);
             this.txtConsoleOut.TabIndex = 0;
             // 
             // label16
@@ -421,11 +416,40 @@
             this.label16.TabIndex = 38;
             this.label16.Text = "Enter as key value pairs seperated by &&. Eg : var1=value1&&var2=value2";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(584, 238);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 39;
+            this.button1.Text = "Clear Nonce";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // txtToken
+            // 
+            this.txtToken.Location = new System.Drawing.Point(108, 126);
+            this.txtToken.Name = "txtToken";
+            this.txtToken.Size = new System.Drawing.Size(227, 20);
+            this.txtToken.TabIndex = 12;
+            // 
+            // chkOauthInBody
+            // 
+            this.chkOauthInBody.AutoSize = true;
+            this.chkOauthInBody.Location = new System.Drawing.Point(542, 190);
+            this.chkOauthInBody.Name = "chkOauthInBody";
+            this.chkOauthInBody.Size = new System.Drawing.Size(158, 17);
+            this.chkOauthInBody.TabIndex = 40;
+            this.chkOauthInBody.Text = "Send oAuth Params in Body";
+            this.chkOauthInBody.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(747, 764);
+            this.Controls.Add(this.chkOauthInBody);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label15);
@@ -487,7 +511,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtConsKey;
         private System.Windows.Forms.TextBox txtConsSecret;
-        private System.Windows.Forms.TextBox txtToken;
         private System.Windows.Forms.TextBox txtTokenSecret;
         private System.Windows.Forms.TextBox txtTimestamp;
         private System.Windows.Forms.TextBox txtNonce;
@@ -513,6 +536,9 @@
 		private System.Windows.Forms.TabPage tabPage2;
 		private System.Windows.Forms.TextBox txtConsoleOut;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox txtToken;
+        private System.Windows.Forms.CheckBox chkOauthInBody;
     }
 }
 

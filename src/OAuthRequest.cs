@@ -21,11 +21,17 @@ namespace OAuthSig
 				return;
 			}
 
-			if (httpMethod == "POST")
+            if (httpMethod == "POST" && _view.SendOAuthParamsInbody == false)
+            {
+                DoHttpPost();
+            }
+
+            if (httpMethod == "POST" && _view.SendOAuthParamsInbody)
 			{
-				DoHttpPost();
+                DoHttpPostWithoAuthParamsInBody();
 			}
-			else
+
+			if (httpMethod == "GET")
 			{
 				DoHttpGet();
 			}
@@ -73,5 +79,26 @@ namespace OAuthSig
 				DisplayError(wex);
 			}
 		}
+
+        private void DoHttpPostWithoAuthParamsInBody()
+        {
+            try
+            {
+                var apiPostRequestBuilder = new OAuthPostRequest();
+                var uri = new Uri(_view.Uri);
+                string response = apiPostRequestBuilder.PostWithoAuthParamsInBody(true,
+                                                              uri, _view.PostData,
+                                                              _view.ConsumerKey,
+                                                              _view.ConsumerSecret, _view.Token,
+                                                              _view.TokenSecret, _view.RawSignature, _view.Nonce,
+                                                              _view.TimeStamp);
+                _view.DisplayResponse(response);
+            }
+            catch (WebException wex)
+            {
+                DisplayError(wex);
+            }
+        }
+
 	}
 }
