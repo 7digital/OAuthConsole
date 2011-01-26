@@ -73,7 +73,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthorizationHeaderBuilder.cs" />
+    <Compile Include="OAuth\AuthorizationHeaderBuilder.cs" />
     <Compile Include="Http\HttPostVariables.cs" />
     <Compile Include="Http\OAuthPostRequest.cs" />
     <Compile Include="OAuth\HttpOAuthClient.cs" />
@@ -151,7 +151,9 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="LICENSE.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

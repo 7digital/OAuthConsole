@@ -10,6 +10,7 @@ namespace SevenDigital.Api.OAuthConsole.UI
         string HttpMethod { get; }
         string TimeStamp { get; set; }
         string Nonce { get; set; }
+        bool SendOAuthParamsInbody { get; }
         string RawSignature { get; set; }
         bool IncludeVersion { get; }
         string EncodedSignature { get; set; }

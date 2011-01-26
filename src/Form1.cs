@@ -101,6 +101,11 @@ namespace SevenDigital.Api.OAuthConsole.UI
             get { return chkVersion.Checked; }
 	    }
 
+	    public bool SendOAuthParamsInbody { get { return chkOauthInBody.Checked; }
+
+	    }
+
+
 	    public string EncodedSignature
 	    {
             get { return txtEncodedSig.Text; }
@@ -122,5 +127,13 @@ namespace SevenDigital.Api.OAuthConsole.UI
 	    {
             get { return drpSigMethod.SelectedIndex; }
 	    }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            txtNonce.Text = string.Empty;
+            txtTimestamp.Text = string.Empty;
+        }
+
+
 	}
 }
