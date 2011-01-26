@@ -78,7 +78,7 @@ namespace SevenDigital.Api.OAuthConsole.UI.OAuth
 				}
 
 				_view.RawSignature = signature;
-				_view.EncodedSignature = myOAuth.UrlEncode(signature);
+				_view.EncodedSignature = OAuthBase.UrlEncode(signature);
 
 				_view.GeneratedUrl = normalizedUrl + "?" + normalizedRequestParameters +
 				                     "&oauth_signature=" + _view.EncodedSignature;

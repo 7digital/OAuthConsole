@@ -9,46 +9,32 @@ namespace SevenDigital.Api.OAuthConsole.UI.OAuth
 	{
 		private readonly IView _view;
 
-		public HttpOAuthClient(IView view)
-		{
+		public HttpOAuthClient(IView view) {
 			_view = view;
 		}
 
-		public void Request()
-		{
+		public void Request() {
 			string httpMethod = _view.HttpMethod;
-			if (String.IsNullOrEmpty(_view.GeneratedUrl))
-			{
+			if (String.IsNullOrEmpty(_view.GeneratedUrl)) {
 				return;
 			}
 
-            if (httpMethod == "POST" && _view.SendOAuthParamsInbody == false)
-            {
-                DoHttpPost();
-            }
-
-            if (httpMethod == "POST" && _view.SendOAuthParamsInbody)
-			{
-                DoHttpPostWithoAuthParamsInBody();
+			if (httpMethod == "POST" ) {
+				DoHttpPost();
 			}
-
-			if (httpMethod == "GET")
-			{
+			else if (httpMethod == "GET") {
 				DoHttpGet();
 			}
 
 			_view.Log();
 		}
 
-		private void DoHttpGet()
-		{
+		private void DoHttpGet() {
 			try {
 				var webClient = new WebClient();
 				string response = webClient.DownloadString(_view.GeneratedUrl);
 				_view.DisplayResponse(response);
-			}
-			catch (WebException wex)
-			{
+			} catch (WebException wex) {
 				DisplayError(wex);
 			}
 		}
@@ -61,41 +47,20 @@ namespace SevenDigital.Api.OAuthConsole.UI.OAuth
 			_view.Log();
 		}
 
-		private void DoHttpPost()
-		{
-			try
-			{
+		private void DoHttpPost() {
+			try {
 				var apiPostRequestBuilder = new OAuthPostRequest();
 				var uri = new Uri(_view.Uri);
 				var oAuthRequest = new OAuthRequest(true, uri, _view.PostData, _view.ConsumerKey, _view.ConsumerSecret, _view.Token, _view.TokenSecret, _view.RawSignature, _view.Nonce, _view.TimeStamp);
+				if (_view.IncludeVersion) oAuthRequest.OAuthVersion = OAuthBase.OAuthVersion;
+				oAuthRequest.UseAuthHeader = _view.UseAuthHeader;
 				string response = apiPostRequestBuilder.Post(oAuthRequest);
 				_view.DisplayResponse(response);
-			}
-			catch (WebException wex)
-			{
+			} catch (WebException wex) {
 				DisplayError(wex);
 			}
 		}
 
-        private void DoHttpPostWithoAuthParamsInBody()
-        {
-            try
-            {
-                var apiPostRequestBuilder = new OAuthPostRequest();
-                var uri = new Uri(_view.Uri);
-                string response = apiPostRequestBuilder.PostWithoAuthParamsInBody(true,
-                                                              uri, _view.PostData,
-                                                              _view.ConsumerKey,
-                                                              _view.ConsumerSecret, _view.Token,
-                                                              _view.TokenSecret, _view.RawSignature, _view.Nonce,
-                                                              _view.TimeStamp);
-                _view.DisplayResponse(response);
-            }
-            catch (WebException wex)
-            {
-                DisplayError(wex);
-            }
-        }
-
+		
 	}
 }

@@ -11,15 +11,22 @@ namespace SevenDigital.Api.OAuthConsole.UI.Http
 {
 	public class OAuthPostRequest
 	{
-		private const string AUTHORIZATION_HEADER = "Authorization";
 		private const string APPLICATION_X_WWW_FORM_URLENCODED = "application/x-www-form-urlencoded";
 
+		private const string AUTHORIZATION_HEADER = "Authorization";
+
 		public string Post(OAuthRequest oAuthRequest) {
+			var client = new WebClient();
 
-			WebClient client = new WebClient();
-
-			string header = new AuthorizationHeaderBuilder().Build(OAuthBase.OAuthVersion, oAuthRequest);
-			client.Headers.Add(AUTHORIZATION_HEADER, header);
+			if (oAuthRequest.UseAuthHeader) {
+				string authHeader = GetAuthHeader(oAuthRequest);
+				client.Headers.Add(AUTHORIZATION_HEADER, authHeader);
+			}else {
+				string oAuthPostParams = GetOAuthParamsForBody(oAuthRequest);
+				string prefix = "";
+				if (!string.IsNullOrEmpty(oAuthRequest.PostParams)) prefix = "&";
+				oAuthRequest.PostParams = oAuthRequest.PostParams + prefix + oAuthPostParams;
+			}
 			client.Headers.Add(HttpRequestHeader.ContentType, APPLICATION_X_WWW_FORM_URLENCODED);
 
 			NotifyRequest(oAuthRequest, client.Headers);
@@ -29,29 +36,30 @@ namespace SevenDigital.Api.OAuthConsole.UI.Http
 			return GetPostResponse(oAuthRequest, client);
 		}
 
+		private string GetAuthHeader(OAuthRequest oAuthRequest) {
+			return new AuthorizationHeaderBuilder().Build(oAuthRequest);
+		}
+
 		private string GetPostResponse(OAuthRequest oAuthRequest, WebClient client) {
 			string response;
 			try {
 				response = client.UploadString(oAuthRequest.FullyQualifiedUrl, oAuthRequest.PostParams);
-				
 			} catch (WebException ex) {
 				NotifyErrorResponse(ex);
-				response =  "[Failed: Please check the Console Out Tab]";
+				response = "[Failed: Please check the Console Out Tab]";
 			}
 			return response;
 		}
 
 		private void NotifyErrorResponse(WebException ex) {
-			var reponse = ex.Response;
+			WebResponse reponse = ex.Response;
 			using (var reader = new StreamReader(reponse.GetResponseStream())) {
 				TestHelper.FireLogMessage("[Invoke POST-Error]: {0}", reader.ReadToEnd());
 			}
 		}
 
 		private void IgnoreSSLErrors() {
-			ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback
-				(
-				(sender, certificate, chain, sslpolicyerrors) => true);
+			ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback((sender, certificate, chain, sslpolicyerrors) => true);
 		}
 
 		private void NotifyRequest(OAuthRequest oAuthRequest, WebHeaderCollection headers) {
@@ -60,113 +68,38 @@ namespace SevenDigital.Api.OAuthConsole.UI.Http
 			TestHelper.FireLogMessage("[Invoke POST-parameters]: {0}", oAuthRequest.PostParams);
 		}
 
-		public string PostWithoAuthParamsInBody(bool oAuthSignRequest, Uri fullyQualifiedUrl, string postParams,
-						string oAuthConsumerKey, string oAuthConsumerSecret,
-						string oAuthTokenKey,
-						string oAuthTokenSecret, string signature, string nonce, string timeStamp)
-		{
+	
 
-
-			WebClient client = new WebClient();
-			string oauthParamsToAdd = string.Empty;
-			if (oAuthSignRequest)
-			{
-				oauthParamsToAdd = GetOAuthParamsForBody(OAuthBase.OAuthVersion, nonce, timeStamp, signature,
-										  oAuthConsumerKey, oAuthTokenKey);
-
-				if (postParams == string.Empty)
-				{
-					postParams = oauthParamsToAdd.Trim("&".ToCharArray());
-				}
-				else
-				{
-					if (oauthParamsToAdd.EndsWith("&") == false)
-						oauthParamsToAdd = oauthParamsToAdd + "&";
-
-
-					postParams = oauthParamsToAdd + postParams;
-
-
-				}
-
-
-			}
-
-
-			client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
-
-			TestHelper.DumpNameValueCollection(client.Headers, "Headers");
-			TestHelper.FireLogMessage("[Invoke POST]: {0}", fullyQualifiedUrl);
-			TestHelper.FireLogMessage("[Invoke POST-parameters]: {0}", postParams);
-			ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback
-				(
-				(sender, certificate, chain, sslpolicyerrors) => true);
-
-			try
-			{
-				return client.UploadString(fullyQualifiedUrl, postParams);
-			}
-			catch (WebException ex)
-			{
-				var reponse = ex.Response;
-				using (var reader = new StreamReader(reponse.GetResponseStream()))
-				{
-					TestHelper.FireLogMessage("[Invoke POST-Error]: {0}", reader.ReadToEnd());
-				}
-				return "[Failed: Please check the Console Out Tab]";
-			}
-		}
-
-
-		public string GetOAuthParamsForBody(string oAuthVersion, string nonce, string timeStamp,
-								 string signature, string oAuthConsumerKey,
-								 string oAuthTokenKey)
+		public string GetOAuthParamsForBody(OAuthRequest authPostRequest)
 		{
 			IDictionary<string, string> oAuthParameters = new Dictionary<string, string>();
-			AddTo(OAuthQueryParameters.VERSION_KEY, oAuthVersion, oAuthParameters);
-			AddTo(OAuthQueryParameters.NONCE_KEY, nonce, oAuthParameters);
-			AddTo(OAuthQueryParameters.TIMESTAMP_KEY, timeStamp, oAuthParameters);
-			AddTo(OAuthQueryParameters.SIGNATURE_METHOD_KEY,
-				  OAuthQueryParameters.HMACSHA1_SIGNATURE_TYPE, oAuthParameters);
-			AddTo(OAuthQueryParameters.CONSUMER_KEY_KEY, oAuthConsumerKey, oAuthParameters);
-			AddTo(OAuthQueryParameters.SIGNATURE_KEY, signature, oAuthParameters);
+			AddTo(OAuthBase.OAuthVersionKey, authPostRequest.OAuthVersion, oAuthParameters);
+			AddTo(OAuthBase.OAuthNonceKey, authPostRequest.Nonce, oAuthParameters);
+			AddTo(OAuthBase.OAuthTimestampKey, authPostRequest.TimeStamp, oAuthParameters);
+			AddTo(OAuthBase.OAuthSignatureMethodKey, OAuthBase.HMACSHA1SignatureType, oAuthParameters);
+			AddTo(OAuthBase.OAuthConsumerKeyKey, authPostRequest.OAuthConsumerKey, oAuthParameters);
+			AddTo(OAuthBase.OAuthSignatureKey,  authPostRequest.Signature , oAuthParameters);
 
-			if (!String.IsNullOrEmpty(oAuthTokenKey))
-			{
-				AddTo(OAuthQueryParameters.TOKEN_KEY, oAuthTokenKey, oAuthParameters);
+			if (!String.IsNullOrEmpty( authPostRequest.OAuthTokenKey)) {
+				AddTo(OAuthBase.OAuthTokenKey, authPostRequest.OAuthTokenKey, oAuthParameters);
 			}
-			return BuildOAuthBodyParamsString(oAuthParameters);
+			return GetKeyPairString(oAuthParameters);
 		}
 
-		private void AddTo(string key, string parameter,
-					   IDictionary<string, string> dictionary)
-		{
-			if (false == String.IsNullOrEmpty(parameter))
-			{
-				dictionary.Add(key, HttpUtility.UrlEncode(parameter));
+		private void AddTo(string key, string parameter, IDictionary<string, string> dictionary) {
+			if (false == String.IsNullOrEmpty(parameter)) {
+				dictionary.Add(key, OAuthBase.UrlEncode(parameter));
 			}
 		}
 
-		private string BuildOAuthBodyParamsString(IDictionary<string, string> oAUthParameters)
-		{
-			StringBuilder sb = new StringBuilder();
+		private string GetKeyPairString(IDictionary<string, string> oAUthParameters) {
+			var sb = new StringBuilder();
 
-			foreach (var kvp in oAUthParameters)
-			{
+			foreach (var kvp in oAUthParameters) {
 				sb.AppendFormat("{0}={1}&", kvp.Key, kvp.Value);
 			}
 			sb.Remove(sb.Length - 1, 1);
 			return sb.ToString();
 		}
-
-
-
-	
-
-	
-	
-
-	
-
 	}
 }

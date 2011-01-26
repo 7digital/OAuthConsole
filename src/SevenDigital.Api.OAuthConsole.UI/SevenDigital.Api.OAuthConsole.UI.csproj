@@ -77,7 +77,6 @@
     <Compile Include="Http\HttPostVariables.cs" />
     <Compile Include="Http\OAuthPostRequest.cs" />
     <Compile Include="OAuth\HttpOAuthClient.cs" />
-    <Compile Include="OAuth\OAuthQueryParameters.cs" />
     <Compile Include="OAuth\OAuthSignatureBuilder.cs" />
     <Compile Include="IView.cs" />
     <Compile Include="OAuth\OAuthRequest.cs" />

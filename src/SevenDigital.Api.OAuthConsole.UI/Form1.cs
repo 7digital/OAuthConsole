@@ -101,7 +101,7 @@ namespace SevenDigital.Api.OAuthConsole.UI
             get { return chkVersion.Checked; }
 	    }
 
-	    public bool SendOAuthParamsInbody { get { return chkOauthInBody.Checked; }
+	    public bool UseAuthHeader { get { return useAuthHeader.Checked; }
 
 	    }
 

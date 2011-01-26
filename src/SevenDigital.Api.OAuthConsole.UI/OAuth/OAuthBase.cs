@@ -93,7 +93,7 @@ namespace SevenDigital.Api.OAuthConsole.UI.OAuth
 
 		protected Random random = new Random();
 
-		protected string unreservedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.~";
+		protected static string unreservedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.~";
 
 		/// <summary>
 		/// Helper function to compute a hash value
@@ -162,7 +162,7 @@ namespace SevenDigital.Api.OAuthConsole.UI.OAuth
 		/// </summary>
 		/// <param name="value">The value to Url encode</param>
 		/// <returns>Returns a Url encoded string</returns>
-		public string UrlEncode(string value)
+		public static string UrlEncode(string value)
 		{
 			StringBuilder result = new StringBuilder();
 
