@@ -79,7 +79,7 @@
     <Compile Include="OAuth\HttpOAuthClient.cs" />
     <Compile Include="OAuth\OAuthSignatureBuilder.cs" />
     <Compile Include="IView.cs" />
-    <Compile Include="OAuth\OAuthRequest.cs" />
+    <Compile Include="OAuth\OAuthRequestData.cs" />
     <Compile Include="TestHelper.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\CustomExtensions.cs" />

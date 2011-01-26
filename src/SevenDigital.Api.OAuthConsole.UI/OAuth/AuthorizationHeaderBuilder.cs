@@ -12,17 +12,17 @@ namespace SevenDigital.Api.OAuthConsole.UI.OAuth
 			}
 		}
 
-		public string Build(OAuthRequest oAuthRequest) {
+		public string Build(OAuthRequestData oAuthRequestData) {
 			IDictionary<string, string> oAuthParameters = new Dictionary<string, string>();
-			Add(OAuthBase.OAuthVersionKey, oAuthRequest.OAuthVersion, oAuthParameters);
-			Add(OAuthBase.OAuthNonceKey, oAuthRequest.Nonce, oAuthParameters);
-			Add(OAuthBase.OAuthTimestampKey, oAuthRequest.TimeStamp, oAuthParameters);
+			Add(OAuthBase.OAuthVersionKey, oAuthRequestData.OAuthVersion, oAuthParameters);
+			Add(OAuthBase.OAuthNonceKey, oAuthRequestData.Nonce, oAuthParameters);
+			Add(OAuthBase.OAuthTimestampKey, oAuthRequestData.TimeStamp, oAuthParameters);
 			Add(OAuthBase.OAuthSignatureMethodKey, OAuthBase.HMACSHA1SignatureType, oAuthParameters);
-			Add(OAuthBase.OAuthConsumerKeyKey, oAuthRequest.OAuthConsumerKey, oAuthParameters);
-			Add(OAuthBase.OAuthSignatureKey, oAuthRequest.Signature, oAuthParameters);
+			Add(OAuthBase.OAuthConsumerKeyKey, oAuthRequestData.OAuthConsumerKey, oAuthParameters);
+			Add(OAuthBase.OAuthSignatureKey, oAuthRequestData.Signature, oAuthParameters);
 
-			if (!String.IsNullOrEmpty(oAuthRequest.OAuthTokenKey)) {
-				Add(OAuthBase.OAuthTokenKey, oAuthRequest.OAuthTokenKey, oAuthParameters);
+			if (!String.IsNullOrEmpty(oAuthRequestData.OAuthTokenKey)) {
+				Add(OAuthBase.OAuthTokenKey, oAuthRequestData.OAuthTokenKey, oAuthParameters);
 			}
 			return BuildOAuthHeaderString(oAuthParameters);
 		}

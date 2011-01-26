@@ -19,19 +19,35 @@ namespace SevenDigital.Api.OAuthConsole.UI.OAuth
 				return;
 			}
 
+			
+			OAuthRequestData oAuthRequest = GetOAuthRequestData();
+
 			if (httpMethod == "POST" ) {
-				DoHttpPost();
+				DoHttpPost(oAuthRequest);
 			}
 			else if (httpMethod == "GET") {
-				DoHttpGet();
+				DoHttpGet(oAuthRequest);
 			}
 
 			_view.Log();
 		}
 
-		private void DoHttpGet() {
+		private OAuthRequestData GetOAuthRequestData() {
+			var uri = new Uri(_view.Uri);
+			var oAuthRequest = new OAuthRequestData(true, uri, _view.PostData, _view.ConsumerKey, _view.ConsumerSecret, _view.Token, _view.TokenSecret, _view.RawSignature, _view.Nonce, _view.TimeStamp);
+			if (_view.IncludeVersion) oAuthRequest.OAuthVersion = OAuthBase.OAuthVersion;
+			oAuthRequest.UseAuthHeader = _view.UseAuthHeader;
+			return oAuthRequest;
+		}
+
+		private void DoHttpGet(OAuthRequestData oAuthRequest) {
 			try {
 				var webClient = new WebClient();
+				if (oAuthRequest.UseAuthHeader)
+				{
+					string authHeader = GetAuthHeader(oAuthRequest);
+					webClient.Headers.Add(HttpRequestHeader.Authorization, authHeader);
+				}
 				string response = webClient.DownloadString(_view.GeneratedUrl);
 				_view.DisplayResponse(response);
 			} catch (WebException wex) {
@@ -39,6 +55,11 @@ namespace SevenDigital.Api.OAuthConsole.UI.OAuth
 			}
 		}
 
+
+		private string GetAuthHeader(OAuthRequestData oAuthRequestData)
+		{
+			return new AuthorizationHeaderBuilder().Build(oAuthRequestData);
+		}
 		private void DisplayError(WebException wex) {
 			_view.DisplayResponse("[Failed: Please check the Console Out Tab]");
 			string response = new StreamReader(wex.Response.GetResponseStream()).ReadToEnd();
@@ -47,14 +68,10 @@ namespace SevenDigital.Api.OAuthConsole.UI.OAuth
 			_view.Log();
 		}
 
-		private void DoHttpPost() {
+		private void DoHttpPost(OAuthRequestData oAuthRequest) {
 			try {
-				var apiPostRequestBuilder = new OAuthPostRequest();
-				var uri = new Uri(_view.Uri);
-				var oAuthRequest = new OAuthRequest(true, uri, _view.PostData, _view.ConsumerKey, _view.ConsumerSecret, _view.Token, _view.TokenSecret, _view.RawSignature, _view.Nonce, _view.TimeStamp);
-				if (_view.IncludeVersion) oAuthRequest.OAuthVersion = OAuthBase.OAuthVersion;
-				oAuthRequest.UseAuthHeader = _view.UseAuthHeader;
-				string response = apiPostRequestBuilder.Post(oAuthRequest);
+				var oAuthPostRequest = new OAuthPostRequest();
+				string response = oAuthPostRequest.Post(oAuthRequest);
 				_view.DisplayResponse(response);
 			} catch (WebException wex) {
 				DisplayError(wex);

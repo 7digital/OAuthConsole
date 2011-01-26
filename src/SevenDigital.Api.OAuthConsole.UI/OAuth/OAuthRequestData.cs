@@ -2,8 +2,8 @@
 
 namespace SevenDigital.Api.OAuthConsole.UI.OAuth
 {
-	public class OAuthRequest {
-		public OAuthRequest(bool oAuthSignRequest, Uri fullyQualifiedUrl, string postParams, string oAuthConsumerKey, string oAuthConsumerSecret, string oAuthTokenKey, string oAuthTokenSecret, string signature, string nonce, string timeStamp) {
+	public class OAuthRequestData {
+		public OAuthRequestData(bool oAuthSignRequest, Uri fullyQualifiedUrl, string postParams, string oAuthConsumerKey, string oAuthConsumerSecret, string oAuthTokenKey, string oAuthTokenSecret, string signature, string nonce, string timeStamp) {
 			OAuthSignRequest = oAuthSignRequest;
 			FullyQualifiedUrl = fullyQualifiedUrl;
 			PostParams = postParams;

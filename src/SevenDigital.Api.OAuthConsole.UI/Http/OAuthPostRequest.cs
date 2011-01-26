@@ -13,37 +13,35 @@ namespace SevenDigital.Api.OAuthConsole.UI.Http
 	{
 		private const string APPLICATION_X_WWW_FORM_URLENCODED = "application/x-www-form-urlencoded";
 
-		private const string AUTHORIZATION_HEADER = "Authorization";
-
-		public string Post(OAuthRequest oAuthRequest) {
+		public string Post(OAuthRequestData oAuthRequestData) {
 			var client = new WebClient();
 
-			if (oAuthRequest.UseAuthHeader) {
-				string authHeader = GetAuthHeader(oAuthRequest);
-				client.Headers.Add(AUTHORIZATION_HEADER, authHeader);
+			if (oAuthRequestData.UseAuthHeader) {
+				string authHeader = GetAuthHeader(oAuthRequestData);
+				client.Headers.Add(HttpRequestHeader.Authorization, authHeader);
 			}else {
-				string oAuthPostParams = GetOAuthParamsForBody(oAuthRequest);
+				string oAuthPostParams = GetOAuthParamsForBody(oAuthRequestData);
 				string prefix = "";
-				if (!string.IsNullOrEmpty(oAuthRequest.PostParams)) prefix = "&";
-				oAuthRequest.PostParams = oAuthRequest.PostParams + prefix + oAuthPostParams;
+				if (!string.IsNullOrEmpty(oAuthRequestData.PostParams)) prefix = "&";
+				oAuthRequestData.PostParams = oAuthRequestData.PostParams + prefix + oAuthPostParams;
 			}
 			client.Headers.Add(HttpRequestHeader.ContentType, APPLICATION_X_WWW_FORM_URLENCODED);
 
-			NotifyRequest(oAuthRequest, client.Headers);
+			NotifyRequest(oAuthRequestData, client.Headers);
 
 			IgnoreSSLErrors();
 
-			return GetPostResponse(oAuthRequest, client);
+			return GetPostResponse(oAuthRequestData, client);
 		}
 
-		private string GetAuthHeader(OAuthRequest oAuthRequest) {
-			return new AuthorizationHeaderBuilder().Build(oAuthRequest);
+		private string GetAuthHeader(OAuthRequestData oAuthRequestData) {
+			return new AuthorizationHeaderBuilder().Build(oAuthRequestData);
 		}
 
-		private string GetPostResponse(OAuthRequest oAuthRequest, WebClient client) {
+		private string GetPostResponse(OAuthRequestData oAuthRequestData, WebClient client) {
 			string response;
 			try {
-				response = client.UploadString(oAuthRequest.FullyQualifiedUrl, oAuthRequest.PostParams);
+				response = client.UploadString(oAuthRequestData.FullyQualifiedUrl, oAuthRequestData.PostParams);
 			} catch (WebException ex) {
 				NotifyErrorResponse(ex);
 				response = "[Failed: Please check the Console Out Tab]";
@@ -62,15 +60,15 @@ namespace SevenDigital.Api.OAuthConsole.UI.Http
 			ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback((sender, certificate, chain, sslpolicyerrors) => true);
 		}
 
-		private void NotifyRequest(OAuthRequest oAuthRequest, WebHeaderCollection headers) {
+		private void NotifyRequest(OAuthRequestData oAuthRequestData, WebHeaderCollection headers) {
 			TestHelper.DumpNameValueCollection(headers, "Headers");
-			TestHelper.FireLogMessage("[Invoke POST]: {0}", oAuthRequest.FullyQualifiedUrl);
-			TestHelper.FireLogMessage("[Invoke POST-parameters]: {0}", oAuthRequest.PostParams);
+			TestHelper.FireLogMessage("[Invoke POST]: {0}", oAuthRequestData.FullyQualifiedUrl);
+			TestHelper.FireLogMessage("[Invoke POST-parameters]: {0}", oAuthRequestData.PostParams);
 		}
 
 	
 
-		public string GetOAuthParamsForBody(OAuthRequest authPostRequest)
+		public string GetOAuthParamsForBody(OAuthRequestData authPostRequest)
 		{
 			IDictionary<string, string> oAuthParameters = new Dictionary<string, string>();
 			AddTo(OAuthBase.OAuthVersionKey, authPostRequest.OAuthVersion, oAuthParameters);
