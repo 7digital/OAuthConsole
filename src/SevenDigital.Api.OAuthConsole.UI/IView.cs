@@ -16,6 +16,7 @@ namespace SevenDigital.Api.OAuthConsole.UI
         string EncodedSignature { get; set; }
         string GeneratedUrl { get; set; }
         string PostData { get; }
+        string ContentType { get; }
         int SignatureMethod { get; }
         void DisplayResponse(string response);
         void Log();

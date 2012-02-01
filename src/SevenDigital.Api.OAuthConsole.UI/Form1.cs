@@ -24,14 +24,11 @@ namespace SevenDigital.Api.OAuthConsole.UI
 		}
 
 		private void btnGenerate_Click(object sender, EventArgs e) {
-		
-
 			new OAuthSignatureBuilder(this).GenerateSignature();
 		}
 
 	    private void makeRequestButton_Click(object sender, EventArgs e)
-	    {
-	        
+	    {   
 			txtConsoleOut.Text = String.Empty;
 			_sb = new StringBuilder();
 	        new HttpOAuthClient(this).Request();
@@ -123,6 +120,11 @@ namespace SevenDigital.Api.OAuthConsole.UI
             get { return postVariablesTextBox.Text; }
 	    }
 
+	    public string ContentType
+	    {
+            get { return txtContentType.Text; }
+	    }
+
 	    public int SignatureMethod
 	    {
             get { return drpSigMethod.SelectedIndex; }
@@ -133,7 +135,5 @@ namespace SevenDigital.Api.OAuthConsole.UI
             txtNonce.Text = string.Empty;
             txtTimestamp.Text = string.Empty;
         }
-
-
 	}
 }
