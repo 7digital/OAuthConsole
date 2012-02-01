@@ -34,7 +34,7 @@ namespace SevenDigital.Api.OAuthConsole.UI.OAuth
 
 		private OAuthRequestData GetOAuthRequestData() {
 			var uri = new Uri(_view.Uri);
-			var oAuthRequest = new OAuthRequestData(true, uri, _view.PostData, _view.ConsumerKey, _view.ConsumerSecret, _view.Token, _view.TokenSecret, _view.RawSignature, _view.Nonce, _view.TimeStamp);
+			var oAuthRequest = new OAuthRequestData(true, uri, _view.PostData, _view.ConsumerKey, _view.ConsumerSecret, _view.Token, _view.TokenSecret, _view.RawSignature, _view.Nonce, _view.TimeStamp, _view.ContentType);
 			if (_view.IncludeVersion) oAuthRequest.OAuthVersion = OAuthBase.OAuthVersion;
 			oAuthRequest.UseAuthHeader = _view.UseAuthHeader;
 			return oAuthRequest;

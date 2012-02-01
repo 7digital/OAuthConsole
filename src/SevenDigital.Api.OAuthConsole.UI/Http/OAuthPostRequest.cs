@@ -11,8 +11,6 @@ namespace SevenDigital.Api.OAuthConsole.UI.Http
 {
 	public class OAuthPostRequest
 	{
-		private const string APPLICATION_X_WWW_FORM_URLENCODED = "application/x-www-form-urlencoded";
-
 		public string Post(OAuthRequestData oAuthRequestData) {
 			var client = new WebClient();
 
@@ -25,7 +23,7 @@ namespace SevenDigital.Api.OAuthConsole.UI.Http
 				if (!string.IsNullOrEmpty(oAuthRequestData.PostParams)) prefix = "&";
 				oAuthRequestData.PostParams = oAuthRequestData.PostParams + prefix + oAuthPostParams;
 			}
-			client.Headers.Add(HttpRequestHeader.ContentType, APPLICATION_X_WWW_FORM_URLENCODED);
+			client.Headers.Add(HttpRequestHeader.ContentType, oAuthRequestData.ContentType);
 
 			NotifyRequest(oAuthRequestData, client.Headers);
 

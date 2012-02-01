@@ -3,7 +3,7 @@
 namespace SevenDigital.Api.OAuthConsole.UI.OAuth
 {
 	public class OAuthRequestData {
-		public OAuthRequestData(bool oAuthSignRequest, Uri fullyQualifiedUrl, string postParams, string oAuthConsumerKey, string oAuthConsumerSecret, string oAuthTokenKey, string oAuthTokenSecret, string signature, string nonce, string timeStamp) {
+		public OAuthRequestData(bool oAuthSignRequest, Uri fullyQualifiedUrl, string postParams, string oAuthConsumerKey, string oAuthConsumerSecret, string oAuthTokenKey, string oAuthTokenSecret, string signature, string nonce, string timeStamp, string contentType) {
 			OAuthSignRequest = oAuthSignRequest;
 			FullyQualifiedUrl = fullyQualifiedUrl;
 			PostParams = postParams;
@@ -14,7 +14,7 @@ namespace SevenDigital.Api.OAuthConsole.UI.OAuth
 			Signature = signature;
 			Nonce = nonce;
 			TimeStamp = timeStamp;
-			 
+		    ContentType = contentType;
 		}
 
 		public bool OAuthSignRequest { get; private set; }
@@ -40,6 +40,7 @@ namespace SevenDigital.Api.OAuthConsole.UI.OAuth
 		public bool UseAuthHeader { get; set; }
 
 		public string OAuthVersion { get; set; }
-			
+
+        public string ContentType { get; set; }
 	}
 }
